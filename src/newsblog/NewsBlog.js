@@ -85,11 +85,6 @@ function NewsBlog() {
             </div>
              */}
 
-            <div>
-                {
-                    flag && <Modal />
-                }
-            </div>
 
             <button onClick={() => {
                 news.splice(0, 1, 'Today news');
@@ -102,6 +97,11 @@ function NewsBlog() {
 
                 // setNews(['Today news', '어제의 뉴스', '내일의 뉴스']);
             }}>제목 변경</button>
+
+            {
+                flag && <Modal news={news} setNews={setNews} bgColor={'lightgreen'}/>
+                // flag == true ? <Modal news={news} setNews={setNews} bgColor={'lightgreen'} /> : null
+            }
 
         </div>
     )
