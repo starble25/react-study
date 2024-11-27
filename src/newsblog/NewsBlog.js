@@ -18,6 +18,10 @@ function NewsBlog() {
 
     let [flag, setFlag] = useState(false);
 
+    let [selectedTitle, setSelectedTitle] = useState('');
+    let [selectedCount, setSelectedCount] = useState(0);
+    let [inputText, setInputText] = useState('');
+
     // {
     //     textArr.map((item, index)=>{
     //         // return <Box text={item} detail={detailArr[index]}/>
@@ -37,9 +41,11 @@ function NewsBlog() {
                     return (
                         <div className='post-list'>
                             <h4>
-                                <span onClick={() => {
-                                    setFlag(!flag);
+                                <span onClick={() => {  // 제목 클릭
+                                    setFlag(!flag);     // Modal On/Off 전환
                                     // flag ? setFlag(false) : setFlag(true);
+                                    setSelectedTitle(item);
+                                    setSelectedCount(count[index]);
                                 }}>{item}</span>
 
                                 <span onClick={() => {
@@ -53,6 +59,14 @@ function NewsBlog() {
                                 }}>💚</span> {count[index]}
                             </h4>
                             <p>내용 무</p>
+
+                            <button onClick={()=>{
+                                let temp = [...news];
+                                temp.splice(index, 1);
+                                setNews(temp);
+
+                                count.splice(index, 1);
+                            }}>삭제</button>
                         </div>
                     )
                 })
@@ -98,8 +112,60 @@ function NewsBlog() {
                 // setNews(['Today news', '어제의 뉴스', '내일의 뉴스']);
             }}>제목 변경</button>
 
+            <div>
+                <input type='text' id='input_news' value={inputText} onChange={(event)=>{
+                    // console.log(event);
+                    // console.log(event.target.value);
+                    setInputText(event.target.value);
+                }}/>
+                <button onClick={()=>{  // 발행버튼을 눌렀을 때
+                    // 전제조건 : 양측에 있는 띄어쓰기는 제외(trim)
+
+                    inputText = inputText.trim();       // 원본값 바꿈
+
+                    // if( inputText.trim() == '' ) {   // 원본값 바꾸지 않음(비파괴)
+                    // if( inputText == '' ) {
+                    // if( inputText.length == 0 ) {
+                    if( inputText.length == 0 
+                        ||inputText == '' 
+                        || inputText == null 
+                        || inputText == undefined) {
+                        alert('값을 입력하세요')
+                        return;
+                    }
+
+                    console.log('a'+inputText);
+
+                    let temp = [...news];
+                    temp.push(inputText);
+                    setNews(temp);
+                    // inputText.trim() == '' ? document.getElementById('input_news').focus() : setNews(temp);
+
+                    setInputText('');
+
+                    count.push(0);
+                    /*
+                    let temp2 = [...count];
+                    temp2.push(0);
+                    setCount(temp2);
+                    */
+
+                    //입력된 값 확인 -> news 배열에 추가 저장
+                    /*
+                    let title = document.getElementById('input_news').value;
+                    console.log(title);
+                    
+                    let temp = [...news];
+                    temp.push(title);
+                    setNews(temp);
+
+                    document.getElementById('input_news').value = '';
+                    */
+                }}>발행</button>
+            </div>
+
             {
-                flag && <Modal news={news} setNews={setNews} bgColor={'lightgreen'}/>
+                flag && <Modal title={selectedTitle} count={selectedCount} news={news} setNews={setNews} bgColor={'lightgreen'}/>
                 // flag == true ? <Modal news={news} setNews={setNews} bgColor={'lightgreen'} /> : null
             }
 
