@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 // function FoodCard2( props ) {
-function FoodCard2( { food, foods, index } ) {
+function FoodCard( { food, foods, index } ) {
 
     return (
             <Card style={{ width: '18rem' }}>
@@ -17,4 +17,4 @@ function FoodCard2( { food, foods, index } ) {
     );
 }
 
-export default FoodCard2;
+export default FoodCard;

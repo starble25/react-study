@@ -2,34 +2,32 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import './FoodMarket.css';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-
-import banner_bg from './banner_bg.jpg';
-import food1 from './food1.jpg';
-import food2 from './food2.jpg';
-import food3 from './food3.jpg';
 
 import foodsData from '../data/foodsData';
 import { useState } from 'react';
-import FoodCard from './FoodCard';
-import FoodCard2 from './FoodCard2';
+
+import { Routes, Route, Link, useNavigate} from 'react-router-dom';
+
+import Home from './pages/Home';
 
 function FoodMarket() {
 
     let [foods, setFoods] = useState(foodsData);
+    let navigate = useNavigate();   // 경로 조작 함수
+
+    // navigate("/detail");
+    // a href = "/detail";
+    // location.href = "/detail";
 
     return (
         <div>
             <Navbar bg="light" data-bs-theme="light">
                 <Container>
-                    <Navbar.Brand href="#home">Market</Navbar.Brand>
+                    <Navbar.Brand href="/">Market</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#features">FoodDetail</Nav.Link>
-                        <Nav.Link href="#pricing">Info</Nav.Link>
+                        <Nav.Link href="#home"><Link to="/">Home</Link></Nav.Link>
+                        <Nav.Link onClick={()=>{ navigate("/detail") }}>FoodDetail</Nav.Link>
+                        <Nav.Link onClick={()=>{ navigate("/info") }}>Info</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>
@@ -50,23 +48,32 @@ function FoodMarket() {
                 {페이지주소경로/image/food2.jpg
                 localhost:3000/image/food2.jpg
              */}
-            <div className='main-bg' style={{ backgroundImage: 'url(' + banner_bg + ')' }}></div>
+            
+            {/* <div>
+                <div className='main-bg' style={{ backgroundImage: 'url(' + banner_bg + ')' }}></div>
 
-            <Container> 
-                <Row>
+                <Container>
+                    <Row>
                         {
-                            foods.map((food, index)=>{
+                            foods.map((food, index) => {
                                 return (
                                     <Col md={4} sm={2} key={index}>
-                                        <FoodCard2 food={food} foods={foods} index={index}/>
+                                        <FoodCard2 food={food} foods={foods} index={index} />
                                     </Col>
                                 )
                             })
                         }
-                </Row>
-            </Container>
+                    </Row>
+                </Container>
+            </div> */}
 
-            <Container>
+            <Routes>
+                <Route path="/" element={<Home foods={foods}/>} />
+                <Route path="/detail" element={<h1>detail page</h1>} />
+                <Route path="/info" element={<h1>info page</h1>} />
+            </Routes>
+
+            {/* <Container>
                 <Row>
                     {
                         foods.map((item, index)=>{
@@ -76,9 +83,9 @@ function FoodMarket() {
                         })
                     }
                 </Row>
-            </Container>
+            </Container> */}
 
-                        {/*
+            {/*
             <Container> 
                 <Row>
                     <Col md={4} sm={2}><FoodCard2 foods={foods[0]}/></Col>

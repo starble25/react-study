@@ -2,7 +2,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-function FoodCard( props ) {
+function FoodCard2( props ) {
 
     return (
         <Col md={4} sm={2}>
@@ -19,4 +19,4 @@ function FoodCard( props ) {
     );
 }
 
-export default FoodCard;
+export default FoodCard2;
