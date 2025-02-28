@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { Routes, Route, Link, useNavigate} from 'react-router-dom';
 
 import Home from './pages/Home';
+import Detail from './pages/Detail';
 
 function FoodMarket() {
 
@@ -48,29 +49,13 @@ function FoodMarket() {
                 {페이지주소경로/image/food2.jpg
                 localhost:3000/image/food2.jpg
              */}
-            
-            {/* <div>
-                <div className='main-bg' style={{ backgroundImage: 'url(' + banner_bg + ')' }}></div>
-
-                <Container>
-                    <Row>
-                        {
-                            foods.map((food, index) => {
-                                return (
-                                    <Col md={4} sm={2} key={index}>
-                                        <FoodCard2 food={food} foods={foods} index={index} />
-                                    </Col>
-                                )
-                            })
-                        }
-                    </Row>
-                </Container>
-            </div> */}
 
             <Routes>
                 <Route path="/" element={<Home foods={foods}/>} />
-                <Route path="/detail" element={<h1>detail page</h1>} />
                 <Route path="/info" element={<h1>info page</h1>} />
+                {/* <Route path="/detail/:index" element={ <Detail foods={foods}/> } /> */}
+                <Route path="/detail/:id" element={ <Detail foods={foods}/> } />
+                <Route path="*" element={<div>찾을 수 없습니다.</div>}/>
             </Routes>
 
             {/* <Container>
@@ -84,15 +69,6 @@ function FoodMarket() {
                     }
                 </Row>
             </Container> */}
-
-            {/*
-            <Container> 
-                <Row>
-                    <Col md={4} sm={2}><FoodCard2 foods={foods[0]}/></Col>
-                    <Col md={4} sm={2}><FoodCard2 foods={foods[1]}/></Col>
-                </Row>
-            </Container>
-             */}
 
             {/* 
             <Container>

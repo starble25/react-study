@@ -1,22 +1,27 @@
+
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { useNavigate } from 'react-router-dom';
 
-function FoodCard2( props ) {
+//function FoodCard(props) {      //props = {food:{title:'', price:'', content:'', id:''}
+function FoodCard({ food, foods, index}) {
+
+    let navigate = useNavigate();
 
     return (
-        <Col md={4} sm={2}>
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={process.env.PUBLIC_URL + props.foods[props.index].imgPath} />
-                <Card.Body>
-                    <Card.Title>{props.foods[props.index].title}</Card.Title>
-                    <Card.Text>{props.foods[props.index].content}</Card.Text>
-                    <Card.Text>{props.foods[props.index].price}</Card.Text>
-                    <Button variant="primary">상세보기</Button>
-                </Card.Body>
-            </Card>
-        </Col>
-    );
+        <Card style={{ width: '18rem' }}>
+            <Card.Img variant="top" src={process.env.PUBLIC_URL + food.imgPath} />
+            <Card.Body>
+                <Card.Title>{food.title}</Card.Title>
+                <Card.Text>{food.content}</Card.Text>
+                <Card.Text>{foods[index].price}</Card.Text>
+                <Button variant="primary" onClick={()=>{
+                    navigate('/detail/' + food.id );
+                }}>상세보기</Button>
+            </Card.Body>
+        </Card>
+    )
 }
 
-export default FoodCard2;
+export default FoodCard;
