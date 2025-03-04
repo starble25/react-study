@@ -72,12 +72,6 @@ function AppRS() {
                         setDrinkList(prevDrinkList => [...prevDrinkList, ...response.data]);
                         // let temp = [...drinkList, ...response.data];
                         // setDrinkList(temp);
-
-                        // let temp2 = [...drinkList];
-                        // response.data.map((item)=>{
-                        //     temp2.push(item);
-                        // })
-                        // setDrinkList(temp2);
                     })
                     .catch( error => {
                         console.log(error);
@@ -118,5 +112,11 @@ function AppRS() {
     );
 
 }
+
+// npm install axios 설치
+
+// 리덕스 관련 라이브러리 설치
+// npm install @reduxjs/toolkit
+// npm install react-redux
 
 export default AppRS;
