@@ -70,16 +70,6 @@ let weather = createSlice({
 
 export let {setWeatherInfo} = weather.actions;
 
-export default configureStore(
-    {
-        reducer: {
-            user: userSlice.reducer,
-            weather: weather.reducer,
-            company: companySlice.reducer
-        }
-    }
-)
-
 
 let companySlice = createSlice({
     name : "company",
@@ -100,6 +90,16 @@ let companySlice = createSlice({
         }
     }
 })
+
+export default configureStore(
+    {
+        reducer: {
+            user: userSlice.reducer,
+            weather: weather.reducer,
+            company: companySlice.reducer
+        }
+    }
+)
 
 export let {changeAddress} = companySlice.actions;
 //import {changeAddress} ...
